@@ -19,8 +19,8 @@ class S3MvnPlugin: Plugin<Project> {
                 ?: return@afterEvaluate
 
             val url = extension.url ?: throw IllegalArgumentException("url is required")
-            val awsKey = extension.getAwsKeyOrDefault(project) ?: return@afterEvaluate
-            val awsSecret = extension.getAwsSecretOrDefault(project) ?: return@afterEvaluate
+            val awsKey = extension.getAwsKeyOrDefault(project)
+            val awsSecret = extension.getAwsSecretOrDefault(project)
 
             project.extensions.configure(PublishingExtension::class.java) {
                 publications {
@@ -29,7 +29,8 @@ class S3MvnPlugin: Plugin<Project> {
                         artifactId = project.name
                         version = project.version.toString()
 
-                        from(project.components.getByName("java"))
+                        val componentName = if (project.plugins.hasPlugin("java")) "java" else "kotlin"
+                        from(project.components.getByName(componentName))
                     }
                 }
 
@@ -38,10 +39,11 @@ class S3MvnPlugin: Plugin<Project> {
                         this.name = "s3"
                         this.url = url
 
-
-                        credentials (AwsCredentials::class.java) {
-                            accessKey = awsKey
-                            secretKey = awsSecret
+                        if(awsKey != null && awsSecret != null) {
+                            credentials (AwsCredentials::class.java) {
+                                accessKey = awsKey
+                                secretKey = awsSecret
+                            }
                         }
                     }
                 }

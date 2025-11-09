@@ -9,14 +9,12 @@ open class S3MvnPluginExtension {
     var awsSecret: String? = null
 }
 
-/**
- * Get the username or GITHUB_ACTOR
- */
-internal fun S3MvnPluginExtension.getAwsKeyOrDefault(project: Project) =
-    awsKey ?: project.findProperty("AWS_ACCESS_KEY_ID") as String?
+internal fun S3MvnPluginExtension.getAwsSecretOrDefault(project: Project): String? =
+    awsSecret
+        ?: project.findProperty("AWS_SECRET_ACCESS_KEY") as String?
+        ?: System.getenv("AWS_SECRET_ACCESS_KEY")
 
-/**
- * Get the token or GITHUB_TOKEN
- */
-internal fun S3MvnPluginExtension.getAwsSecretOrDefault(project: Project) =
-    awsSecret ?: project.findProperty("AWS_SECRET_ACCESS_KEY") as String?
+internal fun S3MvnPluginExtension.getAwsKeyOrDefault(project: Project): String? =
+    awsKey
+        ?: project.findProperty("AWS_ACCESS_KEY_ID") as String?
+        ?: System.getenv("AWS_ACCESS_KEY_ID")
