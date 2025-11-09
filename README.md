@@ -19,7 +19,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.ivcode:your-artifact-name:0.1-SNAPSHOT")
+    implementation("org.ivcode:kcomfy:0.1-SNAPSHOT")
 }
 ```
 
