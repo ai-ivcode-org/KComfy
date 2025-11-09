@@ -14,19 +14,16 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
     steps:
+      # Checkout code
       - uses: actions/checkout@v4
 
+      # Set up JDK
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "21"
 
-      - name: Build
-        run: ./gradlew build --no-daemon
-
-      - name: Test
-        run: ./gradlew test --no-daemon
-
-      - name: Publish
-        run: ./gradlew publish --no-daemon
+      # Build, test, and publish in one step
+      - name: Build, Test, and Publish
+        run: ./gradlew build test publish --no-daemon
