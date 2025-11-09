@@ -7,6 +7,22 @@ Project summary
 ---------------
 KComfy is a small Kotlin library + example workflows that demonstrate how to compose and send prompt requests to a ComfyUI-style backend. It includes templating (Mustache), Retrofit-based HTTP client wiring, and example workflows such as checkpoint-based text-to-image.
 
+Installation
+------------
+To use KComfy in your Kotlin project, add the following dependency to your `build.gradle.kts`
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://maven.ivcode.org.s3.amazonaws.com/snapshot")
+    }
+}
+
+dependencies {
+    implementation("org.ivcode:your-artifact-name:0.1-SNAPSHOT")
+}
+```
+
 Usage
 ------
 
