@@ -31,8 +31,6 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-jackson:2.11.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.1")
 
-    // Jackson
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.+")
 
     // Kotlin reflection (needed when you want to read KClass annotations, properties, etc.)
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.1.10")
